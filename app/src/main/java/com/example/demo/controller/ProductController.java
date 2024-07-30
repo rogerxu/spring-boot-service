@@ -44,7 +44,7 @@ public class ProductController {
     public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
         ErrorDetail rootError = new ErrorDetail("1000000", "Validation failed");
         rootError.setTarget(ex.getObjectName());
-        
+
         List<ErrorDetail> details = ex.getBindingResult().getFieldErrors()
             .stream()
             .map((fieldError) -> {
@@ -69,7 +69,7 @@ public class ProductController {
 
                 ErrorDetail detailError = new ErrorDetail(errorCode, errorMessage);
                 detailError.setTarget(fieldError.getField());
-                
+
                 return detailError;
             })
             .collect(Collectors.toList());
